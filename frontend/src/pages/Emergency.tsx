@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 
 const VoiceWaveform = ({ isActive }: { isActive: boolean }) => (
@@ -22,10 +22,9 @@ const VoiceWaveform = ({ isActive }: { isActive: boolean }) => (
   </div>
 );
 
-const Emergency: React.FC = () => {
+const Emergency = () => {
   const [isActive, setIsActive] = useState(false);
   const [aiStatus, setAiStatus] = useState<'idle' | 'listening' | 'thinking' | 'speaking'>('idle');
-  const [transcript, setLastTranscript] = useState("");
   const [aiResponse, setAiResponse] = useState("");
   
   const recognitionRef = useRef<any>(null);
@@ -37,7 +36,6 @@ const Emergency: React.FC = () => {
 
   useEffect(() => {
     // Setup Siren Sound
-    sirenRef.current = new Audio('https://www.soundjay.com/buttons/sounds/beep-01a.mp3'); // Fallback short beep
     const highQualitySiren = new Audio('https://actions.google.com/sounds/v1/emergency/ambulance_siren.ogg');
     sirenRef.current = highQualitySiren;
     sirenRef.current.loop = true;
@@ -51,7 +49,6 @@ const Emergency: React.FC = () => {
 
       recognitionRef.current.onresult = (event: any) => {
         const text = event.results[0][0].transcript.toLowerCase();
-        setLastTranscript(text);
         
         // Immediate Keyword Check
         const hasKeyword = SOS_KEYWORDS.some(keyword => text.includes(keyword));
@@ -139,7 +136,6 @@ const Emergency: React.FC = () => {
       sirenRef.current.play().catch(e => console.error("Audio play failed:", e));
     }
     
-    // Stop listening/thinking states
     if (recognitionRef.current) recognitionRef.current.stop();
     
     setTimeout(() => {
@@ -160,7 +156,6 @@ const Emergency: React.FC = () => {
   return (
     <div className="bg-white text-gray-900 min-h-screen pt-48 px-10 pb-40 relative overflow-hidden">
       
-      {/* Background Warning Flash */}
       <AnimatePresence>
         {isActive && (
           <motion.div 
@@ -194,7 +189,6 @@ const Emergency: React.FC = () => {
 
         <div className="flex flex-col lg:flex-row items-center justify-center gap-24">
           
-          {/* SOS Trigger */}
           <div className="relative group cursor-pointer">
             <AnimatePresence>
               {isActive && (
@@ -219,7 +213,6 @@ const Emergency: React.FC = () => {
             </motion.button>
           </div>
 
-          {/* AI Voice Assistant */}
           <div className="w-full max-w-md">
             <motion.div 
               animate={isActive ? { borderColor: '#ef4444', backgroundColor: '#fef2f2' } : {}}
