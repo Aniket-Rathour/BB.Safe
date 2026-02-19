@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 
 const ContactSection = () => {
   const [offsetY, setOffsetY] = useState(0);
@@ -12,7 +12,6 @@ const ContactSection = () => {
   return (
     <section className="relative w-full min-h-screen flex items-center justify-center text-center text-white overflow-hidden">
       
-      {/* Note: /earth2.png should exist in public folder for this to work */}
       <img
         src="/earth2.png"
         alt="Earth"

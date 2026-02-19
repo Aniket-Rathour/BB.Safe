@@ -1,4 +1,4 @@
-import React, { useRef, useEffect } from 'react';
+import { useRef } from 'react';
 import { motion } from 'framer-motion';
 import gsap from 'gsap';
 import { useGSAP } from '@gsap/react';
@@ -21,7 +21,7 @@ const UNIQUE_PROTOCOLS = [
   { title: "Shadow Detection", desc: "Intelligently detects persistent followers.", detail: "Angular velocity and persistent vector matching algorithms." },
   { title: "Community Safe Corridor", desc: "Verified 'Safe Hubs' for emergency sanctuary.", detail: "Real-time verification of hub personnel and proximity scoring." },
   { title: "Smart Check-In", desc: "Context-aware pings at journey milestones.", detail: "Adaptive frequency based on current environmental risk index." },
-  { title: "Emergency Power Trigger", desc: "Rapid SOS via unique hardware button sequences.", detail: "Kernel-level intercept for immediate bypass of lock screens." }
+  { title: "Emergency Power Trigger", desc: "Rapid SOS via hardware button sequences.", detail: "Kernel-level intercept for immediate bypass of lock screens." }
 ];
 
 const Features: React.FC = () => {
